@@ -5,5 +5,5 @@ P = importdata('butan50.txt');
 eigve = eigenvectors(:,2:4);
 eigva = eigenvalues(2:4);
 
-ort = orthonormal(eigve, P);
-corners = pccap(P);
+ort = orthonormal(eigenvectors, P);
+corners = pccap(ort);
