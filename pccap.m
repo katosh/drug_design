@@ -1,10 +1,10 @@
 function corners = pccap(X)
     d = 3; % numer of simplex verts
-    n = length(X);
+    n = length(X(1,:));
     corners=zeros(d,n);
     for i=1:d
         olddist = 0;
-        for j=1:length(X')
+        for j=1:length(X(1,:))
             newdist = 0;
             for k=1:i
                 newdist = newdist + norm(corners(k,:)-X(j,:));
