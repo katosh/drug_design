@@ -6,7 +6,7 @@ function corners = pccap(X)
         olddist = 0;
         for j=1:length(X')
             newdist = 0;
-            for k=1:d
+            for k=1:i
                 newdist = newdist + norm(corners(k,:)-X(j,:));
             end
             if olddist < newdist
