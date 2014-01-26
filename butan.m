@@ -6,4 +6,4 @@ eigve = eigenvectors(:,1:5);
 eigva = eigenvalues(1:5);
 
 ort = orthonormal(eigve, P);
-corners = pccap(ort);
+corners = pccap(P);
