@@ -1,5 +1,5 @@
 function corners = pccap(X)
-    d = 3; % simplex dimension
+    d = 3; % numer of simplex verts
     n = length(X);
     corners=zeros(d,n);
     for i=1:d
