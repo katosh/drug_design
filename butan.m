@@ -4,11 +4,11 @@ P = importdata('butan50.txt');
 [lev lew] = eig(P);
 [rev rew] = eig(P');
 
-% just 3
-eigve = eigenvectors(:,1:3);
-eigva = eigenvalues(1:3);
+% just the 3 leading ones
+eigve = lev(:,1:3);
+eigva = lew(1:3);
 
-d = diag(eigenvectors(:,1));
+d = diag(rev(:,1)/sum(rev(:,1)));
 
 ort = orthonormal(eigve, d);
 corners = pccap(ort);

@@ -52,7 +52,7 @@ d=diag(p);
 for k=1:n
     for i=1:1:k-1
        X(:,k)=X(:,k)-(X(:,i)'*d*V(:,k))*X(:,i);
-end
+    end
     X(:,k)=X(:,k)/sqrt(X(:,k)'*d*X(:,k));  %Normalisieren
 end
 
