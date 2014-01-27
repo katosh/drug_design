@@ -13,7 +13,7 @@ d = diag(rev(:,1)/sum(rev(:,1)));
 ort = orthonormal(eigve, d);
 corners = pccap(ort);
 
-A = corners^-1
+A = corners^-1;
 
 chi = ort * A;
 plot(chi)
