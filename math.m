@@ -46,7 +46,6 @@ P=  [2.7272727e-001  0.0000000e+000  0.0000000e+000  4.5454545e-002  0.0000000e+
 p=W(:,1);
 p=p/sum(p);
 
-
 n=3;          %3 metastabile Bereiche, da 3 EW in der Naehe von 1
 X=V(:,1:n);
 d=diag(p);
@@ -54,49 +53,37 @@ for k=1:n
     for i=1:1:k-1
        X(:,k)=X(:,k)-(X(:,i)'*d*V(:,k))*X(:,i);
 end
- X(:,k)=X(:,k)/sqrt(X(:,k)'*d*X(:,k));  %Normalisieren
+    X(:,k)=X(:,k)/sqrt(X(:,k)'*d*X(:,k));  %Normalisieren
 end
 
-%for k=1:n
- %   X(:,k)=X(:,k)/sqrt(X(:,k)'*D*X(:,k));  %Normalisieren
-%end
-
-				      
 Y=X;
 ind=zeros(1,n);
 norm=zeros(42,1);
 step1=true;
 
 for k=1:n
+    for j=1:42
+        norm(j)=Y(j,:)*Y(j,:)';
+    end
+    ind(k)=find(norm==max(norm),1);
 
-for j=1:42
-norm(j)=Y(j,:)*Y(j,:)';
-end
-ind(k)=find(norm==max(norm),1);
-
-if step1
-step1=false;
-Y=Y-repmat(Y(ind(k),:),42,1);
-else
-v=Y(ind(k),:)/sqrt(Y(ind(k),:)*Y(ind(k),:)');
-
-for i=1:42
-	Y(i,:)=Y(i,:)-(v*Y(i,:)')*v;
-end
-
-end
-
+    if step1
+        step1=false;
+        Y=Y-repmat(Y(ind(k),:),42,1);
+    else
+        v=Y(ind(k),:)/sqrt(Y(ind(k),:)*Y(ind(k),:)');
+        for i=1:42
+            Y(i,:)=Y(i,:)-(v*Y(i,:)')*v;
+        end
+    end
 end
 
 for k=1:n
-B(k,1:n)=X(ind(k),:);
+    B(k,1:n)=X(ind(k),:);
 end
 A=inv(B);
-
-		   chi=X*A;
-
+chi=X*A;
 plot(chi)
 legend('1','2','3')
 sym=diag(p)*P;
 max(max(sym-sym'))
-
